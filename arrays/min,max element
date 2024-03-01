@@ -1,0 +1,42 @@
+// using built-in library function
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main() {
+	// Input array
+	int a[] = { 1, 423, 6, 46, 34, 23, 13, 53, 4 };
+	int n = sizeof(a) / sizeof(a[0]);
+
+	// Implemented inbuilt function to sort array
+	sort(a, a + n);
+
+	// after sorting the value at 0th position will minimum and nth position will be maximum
+	cout << "min-" << a[0] << " max-" << a[n - 1] << endl;
+
+	return 0;
+}
+============================================================================================================
+//approach-2
+
+#include <bits/stdc++.h> 
+using namespace std; 
+
+int getMin(int arr[], int n) 
+{ 
+	return *min_element(arr, arr + n); 
+} 
+
+int getMax(int arr[], int n) 
+{ 
+	return *max_element(arr, arr + n); 
+} 
+
+int main() 
+{ 
+	int arr[] = { 12, 1234, 45, 67, 1 }; 
+	int n = sizeof(arr) / sizeof(arr[0]); 
+	cout << "Minimum element of array: " << getMin(arr, n) << "\n"; 
+	cout << "Maximum element of array: " << getMax(arr, n); 
+	return 0; 
+} 
