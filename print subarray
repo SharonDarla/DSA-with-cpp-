@@ -1,0 +1,130 @@
+/* A simple program to print subarraywith sum as given sum */
+ #include <bits/stdc++.h>
+using namespace std;
+
+/* Returns true if the there is a subarray of arr[] with sum equal to 'sum' otherwise returns false. Also, prints the result */
+void subArraySum(int arr[], int n, int sum)
+{
+
+	// Pick a starting point
+	for (int i = 0; i < n; i++) {
+		int currentSum = arr[i];
+
+		if (currentSum == sum) {
+			cout << "Sum found at indexes " << i << endl;
+			return;
+		}
+		else {
+			// Try all subarrays starting with 'i'
+			for (int j = i + 1; j < n; j++) {
+				currentSum += arr[j];
+
+				if (currentSum == sum) {
+					cout << "Sum found between indexes "
+						<< i << " and " << j << endl;
+					return;
+				}
+			}
+		}
+	}
+	cout << "No subarray found";
+	return;
+}
+
+int main()
+{
+	int arr[] = { 15, 2, 4, 8, 9, 5, 10, 23 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+	int sum = 23;
+	subArraySum(arr, n, sum);
+	return 0;
+}
+==================================================================================================================================
+
+//using sliding window technique --not so recommended for me 
+
+/* An efficient program to print subarray with sum as given sum */
+#include <iostream>
+using namespace std;
+
+/* Returns true if the there is a subarray of arr[] with a sum equal to 'sum' otherwise returns false. Also, prints the result */
+int subArraySum(int arr[], int n, int sum)
+{
+	/* Initialize currentSum as value of first element and starting point as 0 */
+	int currentSum = arr[0], start = 0, i;
+
+	/* Add elements one by one to currentSum and if the currentSum exceeds the sum, then remove starting element */
+	for (i = 1; i <= n; i++) {
+		// If currentSum exceeds the sum, then remove the starting elements
+		while (currentSum > sum && start < i - 1) {
+			currentSum = currentSum - arr[start];
+			start++;
+		}
+
+		// If currentSum becomes equal to sum, then return true
+		if (currentSum == sum) {
+			cout << "Sum found between indexes " << start
+				<< " and " << i - 1;
+			return 1;
+		}
+
+		// Add this element to currentSum
+		if (i < n)
+			currentSum = currentSum + arr[i];
+	}
+
+	// If we reach here, then no subarray
+	cout << "No subarray found";
+	return 0;
+}
+
+int main()
+{
+	int arr[] = { 15, 2, 4, 8, 9, 5, 10, 23 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+	int sum = 23;
+	subArraySum(arr, n, sum);
+	return 0;
+}
+=========================================++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//using dynamic programming
+
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+std::vector<int> find_subarray_with_given_sum(const std::vector<int>& arr, int sum)
+{
+	std::unordered_map<int, int> map;
+	int curr_sum = 0;
+	for (int i = 0; i < arr.size(); i++) {
+		curr_sum += arr[i];
+		if (curr_sum == sum) {
+			return std::vector<int>({0, i});
+		}
+		if (map.count(curr_sum - sum)) {
+			return std::vector<int>({map[curr_sum - sum] + 1, i});
+		}
+		map[curr_sum] = i;
+	}
+	return {};
+}
+
+int main()
+{
+	std::vector<int> arr = {15, 2, 4, 8, 5, 10, 23};
+	int target_sum = 21;
+
+	std::vector<int> subarray = find_subarray_with_given_sum(arr, target_sum);
+
+	if (subarray.empty()) {
+		std::cout << "No subarray with sum " << target_sum << " found." << std::endl;
+	} else {
+		std::cout << "Sum found between indexes " << subarray[0] << " and " << subarray[1] << std::endl;
+	}
+
+	return 0;
+}
+
+
