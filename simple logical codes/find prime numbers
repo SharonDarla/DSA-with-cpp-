@@ -1,0 +1,87 @@
+// C++ program to check whether a number is prime or not using recursion(simple method)
+#include <iostream>
+using namespace std;
+// function check whether a number is prime or not
+bool isPrime(int n)
+{
+	static int i = 2;
+
+	// corner cases-"base case"
+	if (n == 0 || n == 1) {
+		return false;
+	}
+
+	// Checking Prime i.e., n==2 .=> prime
+	if (n == i)
+		return true;
+
+	// base cases- checking for odd
+	if (n % i == 0) {
+		return false;
+	}
+	i++;
+	return isPrime(n);
+}
+
+int main()
+{
+
+	isPrime(35) ? cout << " true\n" : cout << " false\n";
+	return 0;
+}
+==============================================================================================================================================================
+#another efficient approach T.C = O(sqrt(n))
+// A school method based C++ program to check if a number is prime
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function check whether a number is prime or not
+bool isPrime(int n)
+{
+	// Corner case
+	if (n <= 1)
+		return false;
+
+	// Check from 2 to square root of n
+	for (int i = 2; i <= sqrt(n); i++)
+		if (n % i == 0)
+			return false;
+
+	return true;
+}
+
+int main()
+{
+	isPrime(11) ? cout << "true\n" : cout << "false\n";
+	return 0;
+}
+==================================================================================================================================================================
+
+#in python
+num = 407  # You can change this value to check other numbers 
+
+# Check if the number is less than or equal to 1
+if num <= 1:
+    print(num, "is not a prime number")
+else:
+    # Check for factors from 2 to num - 1
+    for i in range(2, num):
+        if (num % i) == 0:
+            print(num, "is not a prime number")
+            print(i, "times", num // i, "is", num)
+            break
+    else:
+        print(num, "is a prime number")
+====================================================================================================================================================================
+
+num=int(input())
+if num <= 1:
+    print(num, "is not a prime number")
+else:
+    # Check for factors from 2 to num - 1
+    for i in range(2, num):
+        if (num % i) == 0:
+            print(num, "is not a prime number")
+            break
+    else:
+        print(num, "is a prime number")
