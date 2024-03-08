@@ -1,0 +1,77 @@
+// C++ program to find unique element in matrix  - using hashmap technique
+#include <bits/stdc++.h> 
+using namespace std; 
+#define R 4 
+#define C 4 
+
+// function that calculate unique element 
+int unique(int mat[R][C], int n, int m) 
+{ 
+	// declare map for hashing 
+	unordered_map<int, int> mp;   //two times int becz 1 for key and 1 for value
+
+	for (int i = 0; i < n; i++) 
+		for (int j = 0; j < m; j++) 
+			// increase freq of mat[i][j] in map 
+			mp[(mat[i][j])]++; 
+
+	int flag = false; 
+	// print unique element 
+	for (auto p : mp) {       //auto- tells compiler to accept any type of p,here p is key: mp is value
+		if (p.second == 1) {         //p.first -> key, p.second-> value if p.second(value)==1 =>its frequency is 1, output its key
+			cout << p.first << " "; 
+			flag = 1; //tels one unique elemen is found
+		} 
+	} 
+
+	if (!flag) { 
+		cout << "No unique element in the matrix"; 
+	} 
+} 
+
+int main() 
+{ 
+	int mat[R][C] = { { 1, 2, 3, 20 }, 
+					{ 5, 6, 20, 25 }, 
+					{ 1, 3, 5, 6 }, 
+					{ 6, 7, 8, 15 } }; 
+
+	// function that calculate unique element 
+	unique(mat, R, C); 
+	return 0; 
+}
+==========================================================================================
+
+# in python
+
+# Python program to find unique element in matrix 
+
+# function that calculate unique element 
+def unique(mat, r, c) -> int: 
+	
+	# declare map for hashing 
+	mp = {} 
+	for i in range(r): 
+		for j in range(c): 
+			
+			# increase freq of mat[i][j] in map 
+			if mat[i][j] not in mp: 
+				mp[(mat[i][j])] = 1
+			else: 
+				mp[(mat[i][j])] += 1
+	flag = False
+	
+	# print unique element 
+	for p in mp: 
+		if mp[p] == 1: 
+			print(p, end=" ") 
+			flag = True
+	if flag == False: 
+		print("No unique element in the matrix") 
+
+# Driver program 
+if __name__ == "__main__": 
+	mat = [[1, 2, 3, 20], [5, 6, 20, 25], [1, 3, 5, 6], [6, 7, 8, 15]] 
+	
+	# function that calculate unique element 
+	unique(mat, 4, 4) 
