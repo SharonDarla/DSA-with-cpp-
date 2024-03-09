@@ -152,3 +152,33 @@ int main() {
 
     return 0;
 }
+===============================================
+#in python
+def find_position(matrix, x):
+    n = len(matrix)
+    row, col = 0, len(matrix[0]) - 1  # Start from the top-right corner
+
+    while row < n and col >= 0:
+        if matrix[row][col] == x:
+            return row, col  # Found x
+        elif matrix[row][col] < x:
+            row += 1  # Move down
+        else:
+            col -= 1  # Move left
+
+    # If element not found
+    return -1, -1
+
+# Example usage
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+x = 5
+row, col = find_position(matrix, x)
+
+if row != -1 and col != -1:
+    print(f"Element found at position: ({row}, {col})")
+else:
+    print("Element not found")
