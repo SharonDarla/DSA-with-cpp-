@@ -1,0 +1,68 @@
+// this returns first and second or any no. of occurences of given char in a string
+#include<iostream>
+using namespace std;
+
+int main(){
+ string s1="sharon is a good girl";
+ char c='g';
+ for(int i=0;s1[i]!= '\0';i++){
+    if(s1[i]==c){
+        cout<<i<<endl;
+    }
+ }
+return 0;
+}
+=======================================================================================================================
+//returns only first occurence of a char in str
+
+#include<iostream>
+using namespace std;
+    
+int main(){
+    string str="sharon  is a good girl";
+    char c='g';
+    int i=0;
+    while(str[i] != '\0'){
+        if(str[i]==c){
+            cout<<i<<endl;
+            return 0; //breaks the loop here only to produce only one occurence
+        }
+        i++; //i++ shd be outside of if stmt  bcz its job is to point to next char in str not ony repeating the same line 
+    }
+    cout<<"No char found"<<endl;
+return 0;
+}
+================================================================================================================================
+//same above code for user defined input dynamically
+
+//returns only first occurence of a char in str
+
+#include<iostream>
+
+using namespace std;
+    
+int main(){
+    // string str="sharon  is a good girl";
+    string str;
+    cout<<"enter the string: ";
+    getline(cin,str);
+
+    char c;
+    cout<<"enter the character you want to find: ";
+    cin.get(c);
+    bool found = false; // can also use 0- used to keep track whether char is found or not
+    // char c='g';
+    int i=0;
+    while(str[i] != '\0'){
+        if(str[i]==c){
+            cout<<i<<endl;
+            return 0; //breaks the loop here only to produce only one occurence
+        }
+        i++; //i++ shd be outside of if stmt  bcz its job is to point to next char in str not ony repeating the same line 
+    }
+    if(!found){  //if not found ie., found still =0 execute this
+        cout<<"char "<< c <<" not found in string" <<endl;
+    }
+    
+return 0;
+}
