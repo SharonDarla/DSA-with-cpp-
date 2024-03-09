@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string rotateString(string s, int n) {  // n defines position of string - from where to rotate 
+    int len = s.length();
+    n = n % len;  // Handle cases where n > len
+    string rotated = s.substr(n) + s.substr(0, n);
+    return rotated;
+}
+
+int main() {
+    string s;
+    int n;
+    cout << "Enter the string: ";
+    getline(cin, s);
+    cout << "Enter the number of positions to rotate: ";
+    cin >> n;
+    string rotated = rotateString(s, n);
+    cout << "Rotated string: " << rotated << endl;
+    return 0;
+}
+========================================--------------===================-------------------------------------------------------------------------------
+//code to specify no.of rotations and it returns automatically witjout specifying position of rotation
+#include<bits/stdc++.h>
+using namespace std;
+string rotate(string s, int n){
+    int len=s.length();
+    n=n%len;
+    string rotated=s.substr(n)+s.substr(0,n);
+    return rotated;
+    
+}
+int main(){
+    string s;
+    cout << "Enter the string: ";
+    getline(cin, s);
+
+    int rotations;
+    cout << "Enter the number of rotations: ";
+    cin >> rotations;
+
+    cout << "Rotated strings: " << endl;
+    for (int i = 0; i < rotations; ++i) {
+        string rotated = rotate(s, i);
+        cout << rotated << endl;
+    }
+
+    return 0;
+}
