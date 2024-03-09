@@ -1,0 +1,21 @@
+// different methods to find strin lenght
+
+#include<iostream>
+using namespace std;
+    
+int main(){
+    string str="sharon is a good girl";
+
+    // cout<< str.size() <<endl;     //using size()
+    // cout<< str.length() <<endl;  //using str.length()
+
+    //using while loop
+    int i=0;
+    while(str[i]){
+        i++;
+    }
+    cout<< i <<endl;
+
+
+return 0;
+}
