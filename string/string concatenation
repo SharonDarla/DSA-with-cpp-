@@ -1,0 +1,34 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+    
+int main(){
+    
+string str1("Hello");
+string str2(" World");
+// str1.append(str2);     //using append function
+str1= str1 + str2;        //using + operator
+cout<< str1 <<endl;
+return 0;
+}
+
+// using strcat()
+
+    char str1[]="Hello";
+    char str2[]=" World";
+    strcat(str1,str2);
+    cout<<str1<<endl;
+
+//using for loops
+string s1("Hello");
+string s2(" World");
+string result;
+for(int i=0; s1[i]!='\0';i++){
+    result=result+s1[i];
+}
+for(int i=0; s2[i]!='\0';i++){
+    result=result+s2[i];
+}
+cout<<result<<endl;
+}
+ 
