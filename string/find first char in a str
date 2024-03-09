@@ -42,7 +42,7 @@ return 0;
 using namespace std;
     
 int main(){
-    // string str="sharon  is a good girl";
+
     string str;
     cout<<"enter the string: ";
     getline(cin,str);
@@ -50,8 +50,9 @@ int main(){
     char c;
     cout<<"enter the character you want to find: ";
     cin.get(c);
+
     bool found = false; // can also use 0- used to keep track whether char is found or not
-    // char c='g';
+    
     int i=0;
     while(str[i] != '\0'){
         if(str[i]==c){
