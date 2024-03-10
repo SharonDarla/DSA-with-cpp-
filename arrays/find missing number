@@ -21,3 +21,27 @@ int main()
 	cout << miss;
 	return 0;
 }
+=======================================================================================
+
+// my own method
+#include<bits/stdc++.h>
+using namespace std;
+int mis(int arr[], int n){
+    int N=n+1;
+    int sum1=N *( N+1) /2;
+    int sum2= 0;
+    for(int i=0;i<n;i++){
+        sum2+=arr[i];
+    }
+    int miss=sum1-sum2;
+    return miss;
+}
+
+
+int main(){
+   int arr[] = { 1, 2, 3, 5 };
+	int N = sizeof(arr) / sizeof(arr[0]);
+	int missn = mis(arr, N);    // Function call
+	cout << missn;
+	return 0;
+}
