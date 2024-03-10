@@ -50,4 +50,40 @@ if __name__ == '__main__':
 	arr.remove(key)
 	print("Array after deletion")
 	print(arr)
-  
+=====================================================================================================================
+//efficient cpp code for this
+#include<bits/stdc++.h>
+using namespace std;
+
+void deleteAtSpecificPosition(vector<int> &arr, int pos){
+    // Check if the position is valid
+    if(pos < 0 || pos >= arr.size()){   //element to delete is leass or greater than the given arr
+        cout << "Invalid position!" << endl;
+        return;
+    }
+    
+    // Deleting the element at the specified position
+    arr.erase(arr.begin() + pos);  //arr.begin() points to starting position, begin()+pos => bring iterator from begin to point to pos to delete 
+}
+
+int main(){
+    vector<int> arr = {1, 2, 3, 4, 5};
+    int pos = 2; // Position at which to delete
+
+    cout << "Before Deletion: ";
+    for(int i=0; i<arr.size(); i++){
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    deleteAtSpecificPosition(arr, pos);
+
+    cout << "After Deletion: ";
+    for(int i=0; i<arr.size(); i++){
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
