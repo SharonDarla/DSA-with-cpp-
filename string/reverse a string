@@ -1,0 +1,63 @@
+//simple and effective way to reverse a string
+
+#include<iostream>
+
+using namespace std;
+    void reverse(string& str){
+        int n= str.length();
+        for(int i=0;i< (n/2);i++){    //reads until half of the length bcz reading whole returns sae str
+            swap(str[i], str[n-i-1]); //our n goes till half and swaps & n-i-1 swaps till last
+        }                               // n-i-1= 5-0-1=4 (swap i=0 with 4 )
+    }
+int main(){
+    string str;
+    cout<<"enter the string: ";
+    getline(cin,str);
+    reverse(str);
+    cout<<"the reversed string is: "<<str<<endl;
+return 0;
+}
+
+========================================================
+
+// C++ program to demonstrate reverseof a string using Last to First Approach 'while' Loop
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to reverse a string
+void reverse(string str)
+{
+	int len = str.length();
+	int n = len; 
+	while(n--)
+		cout << str[n];
+}
+
+// Driver code
+int main(void)
+{
+	string s = "GeeksforGeeks";
+
+	reverse(s);
+	return (0);
+}
+======================================================
+// C++ program to demonstrate reverse of a string using Last to First Approach 'for' Loop
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to reverse a string
+void reverse(string str)
+{
+	for (int i = str.length() - 1; i >= 0; i--)
+		cout << str[i];
+}
+
+// Driver code
+int main(void)
+{
+	string s = "GeeksforGeeks";
+	reverse(s);
+	return (0);
+}
+
