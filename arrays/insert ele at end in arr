@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-// Inserts a key in arr[] of given capacity.
+// Inserts a key in unsorted arr[] of given capacity.
 // n is the current size of arr[]. This function returns n + 1 if insertion  is successful, else n.
 
 int insertSorted(int arr[], int n, int key, int capacity)
