@@ -1,0 +1,21 @@
+//my own method
+#include<iostream>
+using namespace std;
+    bool palin(string s){
+        int n=s.length();
+        for(int i=0; i< (n/2);i++){
+            if(s[i]!=s[n-i-1]){
+                return false;
+        }
+    }
+        return true;
+    }
+int main(){
+    string s="abba";
+    if(palin(s)){
+        cout<<"is a palindrome";
+    }else{
+        cout<<"not a palindrome";
+    }
+return 0;
+}
