@@ -1,0 +1,17 @@
+#include <iostream>
+#include <algorithm>
+
+int main() {
+    std::string S;
+    char k;
+    getline(std::cin, S);
+    std::cin >> k;
+    int count = std::count(S.begin(), S.end(), k);
+    std::cout << count;
+    return 0;
+}
+==============================
+  in python
+s=input().strip()
+k=input().strip()
+  print(s.count(k))
