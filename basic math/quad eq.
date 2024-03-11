@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+int main() {
+    int a, b, c;
+    cin >> a >> b >> c;
+    double discriminant = b*b - 4*a*c;
+    if (discriminant > 0) {
+        double root1 = (-b + sqrt(discriminant)) / (2*a);
+        double root2 = (-b - sqrt(discriminant)) / (2*a);
+        cout << fixed << setprecision(2) << root1 << " " << root2;
+    } else if (discriminant == 0) {
+        double root = -b / (2*a);
+        cout << fixed << setprecision(2) << root << " " << root;
+    } else {
+        cout << "Imaginary Roots";
+    }
+    return 0;
+}
+//instead of writing diresctly we can use functions too
