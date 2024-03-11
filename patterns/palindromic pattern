@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int N;
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j <= i; j++) {
+            cout << char('A' + j) << " ";
+        }
+        for (int j = i - 1; j >= 0; j--) {
+            cout << char('A' + j) << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+================================================================================================
+//method-2
+#include <iostream>
+using namespace std;
+int main() {
+ for (int i = 0; i < N; ++i) {
+     char c='A';
+    for (int j = 0; j <= i; ++j) {
+        cout<<c<<" ";
+        c++;
+    }
+    c--;
+    for(int k=0;k<i;++k){
+        c--;
+        cout<<c<<" ";
+    }
+    cout<<endl;
+ }
+ return 0;
+}
