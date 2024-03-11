@@ -1,0 +1,18 @@
+#include <iostream>
+
+long long reverseNumber(long long n) {
+    long long reversedNumber = 0;
+    while (n != 0) {
+        long long remainder = n % 10;
+        reversedNumber = reversedNumber * 10 + remainder;
+        n /= 10;
+    }
+    return reversedNumber;
+}
+
+int main() {
+    long long N;
+    std::cin >> N;
+    std::cout << reverseNumber(N);
+    return 0;
+}
