@@ -1,0 +1,26 @@
+// Harshad num= num/(sum of it digits)
+// ex: 18/(1+8) =2 : no should be divisible
+#include <iostream>
+#include <cmath>
+using namespace std;
+bool isHarshad(int n) {
+    int sum = 0;
+    while (n > 0) {
+        int digit = n % 10;
+        sum += digit;
+        n /= 10;
+    }
+    return n%sum==0;
+}
+
+int main() {
+    int X;
+    cin>>X;
+    if(isHarshad(X)){
+        cout<<"yes";
+    }
+    else{
+        cout<<"no";
+    }
+    return 0;
+}
