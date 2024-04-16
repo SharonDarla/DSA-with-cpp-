@@ -35,3 +35,49 @@ def armNum(N):
     return armSum==N
 res=armNum(N)
 print("Yes" if res else "No")
+
+=============================================================================================================
+
+# efficient method in cpp:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int n;
+    cin>>n;
+    int orginal=n,sum=0;
+    int numDigits=floor(log10(n)+1);
+    while(n>0){
+        int digit=n%10;
+        int power = pow(digit,numDigits);
+        sum+=power;
+        n/=10;
+    }
+    if(sum==orginal){
+        cout<<"Yes"<<endl;
+    }
+    else{
+        cout<<"No"<<endl;
+    }
+
+    return 0;
+}
+
+=============================================================================================================
+# efficient method in python:
+n=int(input())
+orginal=n
+summ=0
+numdigit=len(str(n))
+while (n > 0):
+    digit=n%10
+    power=pow(digit,numdigit)
+    summ+=power
+    n=n//10
+if(summ==orginal):
+    print("Yes")
+else:
+    print("No")
+
