@@ -1,0 +1,22 @@
+2+3=51 ->here answer is 5 but append "1".
+4+7=111
+
+cpp code:
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int a,b;
+    cin>>a>>b;
+    int res=a+b;
+    string ap=to_string(res);
+    ap.append("1");
+    cout << ap << endl; // print the result
+    return 0;
+}
+============================================================
+
+in python:
+a,b=map(int,input().split())
+c=str(a+b)
+print(c+'1')
