@@ -1,0 +1,24 @@
+//enter input type and output its size:
+//my mistake: I did cout<<"size"; ie., cout<<"8";
+//but we need to return 8; ie., return size;
+
+int dataTypes(string type) {
+	// Write your code here
+	if(type == "Integer"){
+		return 4;
+	}
+	else if(type == "Long"){
+		return 8;
+	}
+	else if(type == "Float"){
+		return 4;
+	}
+	else if(type == "Double"){
+		return 8;
+	}
+	else if(type == "Character"){
+		return 1;
+	}else if(type == "invalid"){
+		return -1;
+	}
+}
