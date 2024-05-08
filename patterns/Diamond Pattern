@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+  // prints caseno.s in a loop so, no need of while loop to iterate test cases
+    for(int caseNo=1;caseNo <=t ; caseNo++){
+        cout<<"Case #"<<caseNo<<":"<<endl;
+        int n;
+        cin>>n;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if( j==n/2-i || j==n/2+i || j==i-n/2 || j==3*n/2-i-1)   //main logic
+                    cout<<"*";
+                else
+                    cout<<" ";
+            }
+            cout<<endl;
+        }
+    }
+    return 0;
+}
+=====================================================================================
+
+#include <iostream>
+using namespace std;
+int main() {
+    int T;
+    cin >> T;
+    //nst = no. of stars, nsp = no. of spaces, cst=count stars, csp =count spaces
+    for (int t = 1; t <= T; t++) {
+        cout << "Case #" << t << ":" << endl;
+        int n;
+        cin >> n;
+        int nst = 1;
+        int nsp = n / 2;
+    for (int i = 1; i <= n; i++) {
+        for (int csp = 1; csp <= nsp; csp++)
+            cout << " ";
+        for (int cst = 1; cst <= nst; cst++) {
+            if (cst == 1 || cst == nst)
+                cout << "*";
+            else
+                cout << " ";
+        }
+        if (i < n / 2 + 1) {
+            nst += 2;
+            nsp--;
+        } else {
+            nst -= 2;
+            nsp++;
+        }
+        cout << endl;
+      }
+    }
+    return 0;
+}
