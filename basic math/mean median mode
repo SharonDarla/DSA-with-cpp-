@@ -1,0 +1,40 @@
+//cpp code to find mean median and mode in a sorted array, if unsorted we sort it before calculating median and find out the median.
+//sort --> sort(arr.begin(), arr.end());
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    double sum=0;
+    for(int i=0;i<n;i++){
+        sum+=arr[i];
+    }
+    double mean = sum/n;
+    double median = (n%2 != 0)? arr[n/2] : (arr[(n-1)/2]+ arr[n/2])/2.0;
+        unordered_map<int,int> mp;
+        int mode=arr[0],freq=0;
+        for(int i=0;i<n;i++){
+        mp[arr[i]]++;
+        if(mp[arr[i]] > freq){
+            freq = mp[arr[i]];
+            mode=arr[i];
+        }
+    }
+    cout<<fixed<<setprecision(2)<<mean<<" "<<median<<" "<<mode<<endl;
+    return 0;
+}
+
+============================================
+
+Testing:
+i/p:
+8
+1 2 3 4 5 5 6 6
+o/p:
+4.00 4.50 5
