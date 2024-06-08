@@ -1,0 +1,36 @@
+/*
+For "abc" return "abc" string
+For cb34 return ""(empty string)
+bcz delete first digit and its preceding(left of digit) non-digit value as well 
+and next another digit and its preceding non-digit
+here cb34 delete s[2] and its s[1]
+next delete s[2] ( where 4 takes the new position) and its s[0] ie., c
+
+*/
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string removeDigits(string s) {
+    string result = "";
+    for (char c : s) {
+        if (isdigit(c)) {
+            if (!result.empty()) {
+                result.pop_back();
+            }
+        } else {
+            result.push_back(c);
+        }
+    }
+    return result;
+}
+
+int main() {
+    string s;
+    cout << "Enter a string: ";
+    cin >> s;
+    cout << "Resulting string: " << removeDigits(s) << endl;
+    return 0;
+}
