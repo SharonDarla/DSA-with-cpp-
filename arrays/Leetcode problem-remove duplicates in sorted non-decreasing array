@@ -1,0 +1,116 @@
+Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+
+Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+Return k.
+Custom Judge:
+
+The judge will test your solution with the following code:
+
+int[] nums = [...]; // Input array
+int[] expectedNums = [...]; // The expected answer with correct length
+
+int k = removeDuplicates(nums); // Calls your implementation
+
+assert k == expectedNums.length;
+for (int i = 0; i < k; i++) {
+    assert nums[i] == expectedNums[i];
+}
+If all assertions pass, then your solution will be accepted.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,2]
+Output: 2, nums = [1,2,_]
+Explanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
+It does not matter what you leave beyond the returned k (hence they are underscores).
+Example 2:
+
+Input: nums = [0,0,1,1,1,2,2,3,3,4]
+Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
+Explanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
+It does not matter what you leave beyond the returned k (hence they are underscores).
+ 
+
+Constraints:
+
+1 <= nums.length <= 3 * 104
+-100 <= nums[i] <= 100
+nums is sorted in non-decreasing order.
+================================================================================================
+
+
+Non-decreasing order : means ascending order only but it has duplicate elements.
+ex: 1,1,2,2,3,3,3,4,5,5
+whenever there comes duplicate eleements we use non decreasing / non-increasing
+Non-increasing order: means descending order which contains duplicate elements:
+ex: 5,5,4,4,2,2,1,1
+
+Sol:
+using two ptr technoque:
+#include <iostream>
+#include <vector>
+#include <cassert>
+
+using namespace std;
+
+int removeDuplicates(vector<int>& nums) {
+    if (nums.empty()) return 0;
+
+    int k = 1; // At least one unique element exists (the first one)
+    for (int i = 1; i < nums.size(); ++i) {
+        if (nums[i] != nums[i - 1]) {
+            nums[k] = nums[i];
+            ++k;
+        }
+    }
+    return k;
+}
+
+int main() {
+    vector<int> nums1 = {1, 1, 2};
+    vector<int> expectedNums1 = {1, 2};
+    int k1 = removeDuplicates(nums1);
+    assert(k1 == expectedNums1.size());
+    for (int i = 0; i < k1; ++i) {
+        assert(nums1[i] == expectedNums1[i]);
+    }
+    cout << "Example 1 passed!" << endl;
+
+    vector<int> nums2 = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+    vector<int> expectedNums2 = {0, 1, 2, 3, 4};
+    int k2 = removeDuplicates(nums2);
+    assert(k2 == expectedNums2.size());
+    for (int i = 0; i < k2; ++i) {
+        assert(nums2[i] == expectedNums2[i]);
+    }
+    cout << "Example 2 passed!" << endl;
+
+    return 0;
+}
+=====================================
+
+explaination of solution:
+
+Example:
+Input: nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+
+Initialize k = 1 (first element 0 is always unique).
+
+Start iterating from the second element:
+
+i = 1: nums[1] (0) is equal to nums[0] (0), so skip.
+i = 2: nums[2] (1) is not equal to nums[1] (0), so place 1 at nums[1] and increment k to 2.
+i = 3: nums[3] (1) is equal to nums[2] (1), so skip.
+i = 4: nums[4] (1) is equal to nums[3] (1), so skip.
+i = 5: nums[5] (2) is not equal to nums[4] (1), so place 2 at nums[2] and increment k to 3.
+Continue similarly for the rest of the elements.
+Final nums after processing: [0, 1, 2, 3, 4, _, _, _, _, _] (underscores represent irrelevant values).
+
+k = 5, meaning there are 5 unique elements: 0, 1, 2, 3, 4.
+
+This detailed explanation and walkthrough should clarify how the solution works using the two-pointer technique.
+
