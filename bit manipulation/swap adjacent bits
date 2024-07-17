@@ -1,0 +1,149 @@
+// simple bit manip method
+
+#include <iostream>
+using namespace std;
+
+unsigned long long swapBitsLoop(unsigned long long n) {
+    unsigned long long result = 0;
+    for (int i = 0; i < 64; i += 2) {
+        unsigned long long evenBit = (n >> i) & 1;
+        unsigned long long oddBit = (n >> (i + 1)) & 1;
+        result |= (evenBit << (i + 1)) | (oddBit << i);
+    }
+    return result;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        unsigned long long n;
+        cin >> n;
+        cout << swapBitsLoop(n) << endl;
+    }
+    return 0;
+}
+
+============================================================================================================================
+
+using bit mask method:
+
+#include <iostream>
+using namespace std;
+
+unsigned long long swapBits(unsigned long long n) {
+    // Swap adjacent bits using bitwise operations
+    return ((n & 0xAAAAAAAA) >> 1) | ((n & 0x55555555) << 1);
+}
+
+int main() {
+    int t;
+    cin >> t;
+    vector<unsigned long long> result(t);
+    for (int i = 0; i < t; ++i) {
+        unsigned long long n;
+        cin >> n;
+        result[i] = swapBits(n);
+    }
+    for (const auto& res : result) {
+        cout << res << endl;
+    }
+    return 0;
+}
+
+-------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+unsigned int swapAdjacentBits(unsigned int n) {
+    // Mask to extract even-positioned bits
+    unsigned int evenBits = n & 0xAAAAAAAA;
+    // Mask to extract odd-positioned bits
+    unsigned int oddBits = n & 0x55555555;
+
+    // Right shift evenBits and left shift oddBits
+    evenBits >>= 1;
+    oddBits <<= 1;
+
+    // Combine evenBits and oddBits
+    return evenBits | oddBits;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        unsigned int N;
+        cin >> N;
+        cout << swapAdjacentBits(N) << endl;
+    }
+
+    return 0;
+}
+
+-------------------------------------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+unsigned int swapAdjacentBits(unsigned int n) {
+    // Mask to extract even-positioned bits
+    unsigned int evenBits = n & 0xAAAAAAAA;
+    // Mask to extract odd-positioned bits
+    unsigned int oddBits = n & 0x55555555;
+
+    // Right shift evenBits and left shift oddBits
+    evenBits >>= 1;
+    oddBits <<= 1;
+
+    // Combine evenBits and oddBits
+    return evenBits | oddBits;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        unsigned int N;
+        cin >> N;
+        cout << swapAdjacentBits(N) << endl;
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------
+long cut
+
+#include <iostream>
+using namespace std;
+
+unsigned int swapAdjacentBits(unsigned int n) {
+    // Mask to extract even-positioned bits
+    unsigned int evenBits = n & 0xAAAAAAAA;
+    // Mask to extract odd-positioned bits
+    unsigned int oddBits = n & 0x55555555;
+
+    // Right shift evenBits and left shift oddBits
+    evenBits >>= 1;
+    oddBits <<= 1;
+
+    // Combine evenBits and oddBits
+    return evenBits | oddBits;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        unsigned int N;
+        cin >> N;
+        cout << swapAdjacentBits(N) << endl;
+    }
+
+    return 0;
+}
+
