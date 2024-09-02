@@ -106,5 +106,25 @@ int main() {
     return 0;
 }
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+using strings:
+
+#include <iostream>
+#include <cmath>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+
+int main() {
+    int n; 
+    cout<<"enter a number: \n"; //input a number
+    cin>>n; 
+    
+    string str = to_string(n); // convert that num to string 
+    cout<< "no.of digits is: " << str.size() <<endl;  // len of str== no.of digits 
+    
+}
+
 
   
