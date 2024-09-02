@@ -1,0 +1,21 @@
+// logic: triangle: sum of 2 sides > 3rd side 
+1.a + b > c 
+2.a + c > b 
+3.b + c > a  
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a,b,c;
+    cout << "enter a,b,c values ie., 3 sides of a triangle: \n";
+    cin>>a>>b >>c ;
+    if(((a+b)>c) && ((b+c)>a) && ((c+a)>b)){
+        cout<<"Yes, it is a triangle."<<endl;
+    }
+    else{
+        cout<<"No"<<endl;
+    }
+    
+}
