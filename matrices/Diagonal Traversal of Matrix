@@ -1,0 +1,197 @@
+Que: Diagonal Traversal of Matrix 
+Given a 2D matrix of size NxN, print the sum of the elements of all its diagonals.
+Input Format
+The first line of input contains T - the number of test cases. The first line of each test case contains the N - the size of the matrix. Each of the next N lines contains N integers - the elements of the matrix.
+
+Output Format
+For each test case, print the sum of the elements of all the diagonals, separated by a new line. Refer to samples for more clarity.
+
+Constraints
+1 <= T <= 100
+1 <= N <= 100
+-100 <= ar[i][j] <= 100
+
+Example
+Input
+4
+3
+-5 0 4
+2 8 -6
+3 7 1
+1
+-4
+2
+5 -2
+-4 1
+6
+-2 -3 -6 -5 50 3
+8 7 10 -5 -3 30
+6 3 70 9 -20 -7
+-9 9 -6 7 3 2
+-1 7 7 6 -4 3
+8 5 6 -9 40 8
+
+Output
+4 -6 4 9 3
+-4
+-2 6 -4
+3 80 -15 -29 22 86 51 13 4 4 8
+
+Explanation
+
+Test Case 1
+Sum of the elements of the 1st diagonal: 4
+Sum of the elements of the 2nd diagonal: 0 + -6 = -6
+Sum of the elements of the 3rd diagonal: -5 + 8 + 1 = 4
+Sum of the elements of the 4th diagonal: 2 + 7 = 9
+Sum of the elements of the 5th diagonal: 3
+
+Test Case 2
+
+Sum of the elements of the 1st and only diagonal: -4
+
+Test Case 3
+
+Sum of the elements of the 1st diagonal: -2
+Sum of the elements of the 2nd diagonal: 5 + 1 = 6
+Sum of the elements of the 3rd diagonal: -4
+
+-----------------------------------------------------------------------
+
+Sol:
+Diagonal traversal:
+Concept --> Diagonal traversal of matrix is of 2 types:
+1. Primary Diagonals: These run from the top-left to the bottom-right.
+2. Secondary Diagonals: These run from the top-right to the bottom-left.
+
+Here he is askn sum of all primary diagonals.
+
+Sol:
+
+For matrix T.C wd be O(n^2) only but for reducing S.C we have two approaches
+see book (SI) for detailed exp:
+
+//code (using a vector and a map)
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+int main() {
+    int T;  // Number of test cases
+    cin >> T;
+    
+    while (T--) {
+        int N;  // Size of the matrix
+        cin >> N;
+        
+        // Reading the matrix
+        vector<vector<int>> matrix(N, vector<int>(N));
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                cin >> matrix[i][j];
+            }
+        }
+
+        // To store the sums of each diagonal, where the key is i - j
+        map<int, int> diagSums;
+        
+        // Loop through the matrix and calculate the sum for each diagonal
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                int diff = i - j;  // Determine the diagonal based on row - column
+                diagSums[diff] += matrix[i][j];
+            }
+        }
+
+        // Output the diagonal sums in order
+        for (int d = -N + 1; d < N; ++d) {
+            if (d > -N + 1) cout << " ";  // Print space between numbers
+            cout << diagSums[d];
+        }
+        cout << endl;  // New line after each test case
+    }
+
+    return 0;
+}
+
+Pseudocode:
+read(n)
+read(mat(n))
+read(map<int,int> sums) key->i-j index value and value->stores its corresponding index (i-j) of orginal matrix sum
+d=i-j;
+sums+=mat[i][j] // orginal matrix lo unna that index value element send to sums[d]
+
+//print o/p
+
+logic: loop from -(n-1) to (n-1) ie., -n+1 to n
+if k > -n+1  print" "(space)  k>-(N-1) => starting value so dont print space 
+for remaining print value
+
+//code to print o/p
+for (int d = -N + 1; d < N; ++d) {
+            if (d > -N + 1) cout << " ";  // Print space between numbers
+            cout << diagSums[d];
+        }
+        cout << endl;  // New line after each test case
+    }
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Sol-2:  using a vector instead of map
+
+key logic:  index = (i - j) + (N - 1);
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int T;  // Number of test cases
+    cin >> T;
+    
+    while (T--) {
+        int N;  // Size of the matrix
+        cin >> N;
+        
+        // Reading the matrix
+        vector<vector<int>> matrix(N, vector<int>(N));
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                cin >> matrix[i][j];
+            }
+        }
+
+        // To store the sums of each diagonal
+        vector<int> diagSums(2 * N - 1, 0);
+        
+        // Loop through the matrix and calculate the sum for each diagonal
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                int index = (i - j) + (N - 1);  // Shift index to range [0, 2N-2]
+                diagSums[index] += matrix[i][j];
+            }
+        }
+
+        // Output the diagonal sums
+        for (int i = 0; i < diagSums.size(); ++i) {
+            if (i > 0) cout << " ";  // Print space between numbers
+            cout << diagSums[i];
+        }
+        cout << endl;  // New line after each test case
+    }
+
+    return 0;
+}
+
+explaination : why are we usin this int index = (i - j) + (N - 1); // removing negetive indices in new arr
+
+Diagonal Identification:
+In a matrix, elements on the same diagonal have the same difference between their row and column indices. For example, in a 3x3 matrix:
+The main diagonal elements (top-left to bottom-right) have indices (0,0), (1,1), (2,2), and the difference (i - j) is 0.
+The diagonal above the main diagonal has indices (0,1), (1,2), and the difference (i - j) is -1.
+The diagonal below the main diagonal has indices (1,0), (2,1), and the difference (i - j) is 1.
+
+Index Shifting:
+The difference (i - j) can range from (-(N-1)) to ((N-1)) in an (N \times N) matrix. To use this difference as an index in an array, it needs to be shifted to a non-negative range.
+By adding ((N - 1)) to (i - j), the range is shifted to ([0, 2N - 2]). This ensures that all possible diagonal differences map to valid indices in the diagSums array.
