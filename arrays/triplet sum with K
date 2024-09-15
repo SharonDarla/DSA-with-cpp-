@@ -1,0 +1,153 @@
+You are given an integer array and a positive integer K. You have to tell if there exists i,j,k in the given array such that ar[i]+ar[j]+ar[k]=K, i≠j≠k.
+Input Format
+The first line of input contains T - the number of test cases. Its followed by 2T lines, the first line contains N and K - the size of the array and the number K. The second line contains the elements of the array.
+
+Output Format
+For each test case, print "true" if the arrays contains such elements, false otherwise, separated by new line.
+
+Constraints
+30 points
+1 <= T <= 100
+3 <= N <= 100
+70 points
+1 <= T <= 100
+3 <= N <= 1000
+
+General Constraints
+-100000 <= A[i] <= 100000
+0 <= K <= 100000
+
+Example
+Input
+3
+5 60
+1 20 40 100 80
+12 54
+12 45 52 65 21 645 234 -100 14 575 -80 112
+3 15
+5 5 5
+
+Output
+false
+true
+true
+
+===============================================================================================================================================
+Sol:
+Bruteforce : use 3 for loops to iterate on that array for 3 indices 
+1st loop till n-3
+2nd loop till n-2
+3rd till n-1 ie., last to maitain uniqueness between ele ie., (i) != (j) != (k) and i < j < k
+
+//code:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool triplet(vector<int>&arr, int n, int k){
+    for(int i=0;i<n-2;i++){
+        for(int j=i+1;j<n-1;j++){
+            for(int l=j+1;l<n;l++){
+                if(arr[i]+arr[j]+arr[l] == k){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t; cin >> t;
+    while(t--){
+        int n , k ; cin >> n >> k;
+        vector<int> arr(n);
+        for(int i=0;i<n;i++){
+            cin >> arr[i];
+        }
+        if(triplet(arr,n,k)){
+            cout << "true"<<endl;;
+        }
+        else{
+            cout<<"false"<<endl;
+        }
+    }
+    return 0;
+}
+it accepts partial test cases - 30/100 - O ( N^3)
+
+better approach :
+
+sort + two ptr:  (OlogN + N^2 ) == O(N^2)
+
+1. sort the array 
+2. before applying two ptr understand the logic
+    to apply we need to sort the arr first for better use and we need to elements to work on 
+so apply the logic: a+b+c = k
+                    b+c = k-a
+ex : [5 5 5] k = 15
+b  + c = k-a
+5+5 = 15 - 5
+10 = 10 (T)
+
+// code
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool triplet(vector<int>&arr, int n, int k){
+    sort(arr.begin(),arr.end());
+
+    for(int i=0;i<n-2;i++){
+        int start = i+1, end= n-1;
+         while(start < end){
+             int sum= arr[i] + arr[start] + arr[end];
+             if(sum == k){
+                 return true;
+             }
+             else if(sum < k){
+                 start++;
+             }
+             else{
+                 end--;
+             }
+         }
+    }
+    return false;
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t; cin >> t;
+    while(t--){
+        int n , k ; cin >> n >> k;
+        vector<int> arr(n);
+        for(int i=0;i<n;i++){
+            cin >> arr[i];
+        }
+        
+        if(triplet(arr,n,k)){
+            cout << "true"<<endl;;
+        }
+        else{
+            cout<<"false"<<endl;
+        }
+    }
+    return 0;
+}
+
+explaination :
+
+for (int i = 0; i < N - 2; i++) {
+        int left = i + 1;
+        int right = N - 1;
+Step 2: Iterating with the Two-Pointer Technique
+We iterate over the array starting from the first element i. For each element, we try to find two other elements (left and right) such that their sum with arr[i] equals K.
+We initialize left = i + 1 (the next element after i) and right = N - 1 (the last element in the array).
+we check whether the sum of a[i] first ele and two ptr elemets == k or not if yes true.
+
+
+============================================================================
+
+optimised : using maps
