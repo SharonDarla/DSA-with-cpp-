@@ -1,0 +1,81 @@
+Find the cube root of the given number. Assume that all the input test cases will be a perfect cube.
+
+Note: Do not use any inbuilt functions / libraries for your main logic.
+Input Format
+
+The first line of input contains T - the number of test cases. It is followed by T lines, each containing a single integer.
+Output Format
+
+For each test case, print the cube root of the number, separated by a new line.
+
+Constraints
+30 points
+1 <= T <= 103
+-109 <= N <= 109
+
+70 points
+1 <= T <= 106
+-1018 <= N <= 1018
+Example
+Input
+5
+-27
+-125
+1000
+6859
+-19683
+
+Output
+-3
+-5
+10
+19
+-27
+
+Sol:
+
+n = 27
+absN = 27
+
+i = 1, i^3 = 1, 1 <= 27 (True), 1 != 27 (True), i++
+i = 2, i^3 = 8, 8 <= 27 (True), 8 != 27 (True), i++
+i = 3, i^3 = 27, 27 <= 27 (True), 27 == 27 (True), return 3
+
+n = -64
+absN = 64
+
+i = 1, i^3 = 1, 1 <= 64 (True), 1 != 64 (True), i++
+i = 2, i^3 = 8, 8 <= 64 (True), 8 != 64 (True), i++
+i = 3, i^3 = 27, 27 <= 64 (True), 27 != 64 (True), i++
+i = 4, i^3 = 64, 64 <= 64 (True), 64 == 64 (True), return -4
+
+//code:
+
+#include <iostream>
+using namespace std;
+
+// Function to find the cube root of a number using simple iteration
+long long cubeRoot(long long n) {
+    long long absN = abs(n);
+    long long i = 1;
+    while (i * i * i <= absN) {
+        if (i * i * i == absN) {
+            return n < 0 ? -i : i;
+        }
+        i++;
+    }
+    return -1; // This should never be reached if input is a perfect cube
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        long long N;
+        cin >> N;
+        cout << cubeRoot(N) << endl;
+    }
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------
+
