@@ -1,0 +1,166 @@
+que:
+Given an array of integers, answer queries of the form: [i, j]: Print the sum of array elements from A[i] to A[j], both inclusive.
+
+Input Format
+The first line of input contains the N-size of the array. The next line contains N integers - elements of the array. The next line contains Q - number of queries. Each of the next Q lines contains 2 space-separated indexes: i and j.
+
+Output Format
+For each query, print the sum of array elements from A[i] to A[j], both inclusive, separated by a new line.
+
+Constraints
+30 points
+1 <= N, Q <= 10000
+
+70 points
+1 <= N, Q <= 500000
+
+General Constraints
+-109 <= A[i] <= 109
+0 <= i <= j <= N-1
+Example
+Input
+10
+1 30 13 -4 -5 12 -53 -12 43 100
+4
+0 5
+1 7
+2 3
+7 9
+
+Output
+47
+-19
+9
+131
+
+====================================================================================================================
+Sol : 
+
+Sol :
+
+// Brute force- using for loop :  O(Q*N)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    long long n;
+    cin>>n;
+    long long a[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    long long q;
+    cin>>q;
+    while(q--){
+        long long i,j;
+        cin>>i>>j;
+        long long sum=0;
+        for(int b=i;b<=j;b++){
+            sum+=a[b];
+        }
+        cout<< sum <<endl;
+    }
+    
+    return 0;
+}
+
+Better solution : Using Prefix-Sum Array: O(N+Q)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int n; cin >>n;
+    vector<long long> arr(n);
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+
+    vector<long long> PS(n);
+    PS[0]= arr[0];
+    for(int i=1; i<n; i++){
+        PS[i] = PS[i-1] + arr[i];
+    }
+
+    int q; cin >>q;
+    while(q--){
+        int i,j;
+        cin >> i >>j;
+
+        if(i==0){
+            cout << PS[j] <<endl;
+        }
+        else{
+            cout << PS[j] - PS[i-1] << endl;
+        }
+    }
+    return 0;
+}
+
+
+Explaination of this part :
+
+This part of the code is calculating the sum of elements from index i to j in the array using the prefix sum array.
+
+Prefix Sum Array Recap:
+The prefix sum array stores the cumulative sum of elements of the array. For example, if the original array is:
+A=[1,30,13,−4,−5,12]
+The prefix sum array will be:
+
+prefixSum=[1,31,44,40,35,47]
+Each element in the prefix sum array tells us the sum of all elements from the start (index 0) up to that element. For example:
+
+prefixSum[0] = 1 (the sum of just A[0])
+prefixSum[1] = 31 (the sum of A[0] + A[1] = 1 + 30 = 31)
+prefixSum[2] = 44 (the sum of A[0] + A[1] + A[2] = 1 + 30 + 13 = 44)
+Now, let’s see how the code calculates the sum for any range of elements from index i to index j.
+
+Example 1: Query from i = 0 to j = 3
+Let’s say you want to calculate the sum of elements from index 0 to index 3 in the array A = [1, 30, 13, -4, -5, 12].
+
+The query is: i = 0, j = 3.
+
+Here is what happens in the code:
+code
+if (i == 0) {
+    cout << prefixSum[j] << endl;
+}
+Since i = 0, the sum of the elements from index 0 to index 3 is directly equal to prefixSum[3].
+Why? Because prefixSum[3] already stores the sum of all elements from index 0 to index 3.
+In our example:
+
+prefixSum[3]=40
+So, the sum from A[0] to A[3] is 40. The code prints 40.
+Example 2: Query from i = 2 to j = 5
+Now let’s say you want to calculate the sum of elements from index 2 to index 5. The query is: i = 2, j = 5.
+
+Here is what happens in the code:
+
+else {
+    cout << prefixSum[j] - prefixSum[i - 1] << endl;
+}
+In this case, i ≠ 0, so the sum of elements from index i = 2 to j = 5 is calculated by subtracting prefixSum[i-1] from prefixSum[j].
+This works because prefixSum[j] gives the sum of elements from index 0 to j, and prefixSum[i-1] gives the sum of elements from index 0 to i-1.
+So, by subtracting prefixSum[i-1] from prefixSum[j], we get the sum of elements from index i to j.
+Step-by-step Explanation for i = 2, j = 5:
+prefixSum[5] = 47 (the sum of elements from A[0] to A[5]: 1 + 30 + 13 - 4 - 5 + 12 = 47)
+prefixSum[1] = 31 (the sum of elements from A[0] to A[1]: 1 + 30 = 31)
+So, the sum from A[2] to A[5] is:
+
+prefixSum[5]−prefixSum[1]=47−31=16
+
+The code prints 16.
+Why This Works:
+The prefix sum array stores cumulative sums. For any range of elements, we can compute the sum by subtracting the cumulative sum up to the element just before the start of the range.
+If the range starts from index 0, we don’t need to subtract anything (just use prefixSum[j] directly).
+If the range starts from some other index i, we subtract prefixSum[i-1] from prefixSum[j] to get the sum from A[i] to A[j].
+Summary of the Code Logic:
+If the range starts at index 0 (i = 0), we directly use prefixSum[j] because it gives the sum from the start to index j.
+If the range starts at some other index (i ≠ 0), we subtract prefixSum[i-1] from prefixSum[j] to get the sum of elements from A[i] to A[j].
+This approach makes it efficient to answer range sum queries in constant time (O(1)) after preprocessing the prefix sum array in linear time (O(N)).
+
+===========================================================================================================================================================
+
