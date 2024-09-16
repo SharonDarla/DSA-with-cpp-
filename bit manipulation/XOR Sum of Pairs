@@ -1,0 +1,157 @@
+You are given an array of integers. Find the XOR of all the pairwise sums formed by the elements of the array.
+
+
+
+Input Format
+
+The first line of input contains T - the number of test cases. It is followed by 2T lines, the first line contains N - the size of the array. The second line contains the elements of the array.
+
+
+
+Output Format
+
+For each test case, print the XOR product of all the pairwise sums of the elements from the array, separated by a newline.
+
+
+
+Constraints
+
+10 points
+
+1 <= T <= 100
+
+1 <= N <= 1000
+
+0 <= A[i] <= 105
+
+
+
+40 points
+
+1 <= T <= 100
+
+1 <= N <= 105
+
+0 <= A[i] <= 105
+
+
+
+Example
+
+Input
+
+2
+
+5
+
+4 10 54 11 8
+
+6
+
+15 35 25 10 15 12
+
+
+
+Output
+
+118
+
+120
+
+
+
+Explanation
+
+
+
+Test-Case 1
+
+All the pairwise sums formed with 4 are (4 + 4), (4 + 10), (4 + 54), (4 + 11), (4 + 8) = 8, 14, 58, 15, 12
+
+All the pairwise sums formed with 10 are (10 + 4), (10 + 10), (10 + 54), (10 + 11), (10 + 8) = 14, 20, 64, 21, 18
+
+All the pairwise sums formed with 54 are (54 + 4), (54 + 10), (54 + 54), (54 + 11), (54 + 8) = 58, 64, 108, 65, 62
+
+All the pairwise sums formed with 11 are (11 + 4), (11 + 10), (11 + 54), (11 + 11), (11 + 8) = 15, 21, 65, 22, 19
+
+All the pairwise sums formed with 8 are (8 + 4), (8 + 10), (8 + 54), (8 + 11), (8 + 8) = 12, 18, 62, 19, 16
+
+
+
+XOR of all the above sums = (8 ^ 14 ^ 58 ^ 15 ^ 12) ^ (14 ^ 20 ^ 64 ^ 21 ^ 18) ^ (58 ^ 64 ^ 108 ^ 65 ^ 62) ^ (15 ^ 21 ^ 65 ^ 22 ^ 19) ^ (12 ^ 18 ^ 62 ^ 19 ^ 16) = 118
+
+Sol see S.I primary submission (bruteforce)
+better : Mathematical Property of XOR and Pairwise Summation.
+
+#include <iostream>
+#include<vector>
+using namespace std;
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int t; cin>>t;
+
+    while(t--){
+        int n; cin>>n;
+
+        vector<long long>arr(n);
+        long long sum=0;
+        for(int i=0;i<n;++i){
+            cin>>arr[i];
+            sum^=arr[i];
+        }
+        cout<<(sum*2)<<endl; 
+    }
+    return 0;
+}
+
+==============================================================================================================
+
+
+
+Other Optimized Approaches:
+# 1. Brute Force (Pairwise Calculation) Approach:
+
+For each test case, loop through all pairs of elements in the array, calculate the sum of each pair, and then take the XOR of all sums.
+Time Complexity: O(N²) per test case.
+Not efficient for large arrays due to quadratic complexity, but works for smaller inputs.
+
+
+#2. Mathematical Property of XOR and Pairwise Summation:
+
+Instead of directly calculating each pairwise sum and XORing them, recognize patterns in XOR for repeated sums.
+We can avoid explicitly calculating sums for all pairs by using the fact that for XOR, order doesn’t matter, and self-pairs like A[i] + A[i] might cancel each other due to the properties of XOR.
+Use optimized summation formulas based on XOR properties (for example, (a + b) appears twice in the summation, hence it might cancel out in XOR).
+Time Complexity: O(N), using mathematical reductions instead of pairwise summations.
+
+
+#3. Bitwise Manipulation Approach:
+
+This approach leverages bitwise operations. For each bit position (from the least significant to the most significant), calculate how often a bit is set among pairwise sums and use this to determine the contribution of this bit to the final XOR.
+For each test case:
+Loop through the elements to count how many numbers have a particular bit set.
+For each bit, compute how many pairwise sums will have that bit set.
+Use this information to compute the contribution of each bit to the final XOR.
+Time Complexity: O(N * log(max(A[i]))), where log(max(A[i])) is the number of bits needed to represent the largest number.
+
+
+#4. Optimized XOR Accumulation Approach:
+
+Recognize that the XOR of sums can be broken down into the XOR of individual elements paired in specific ways. By keeping track of how elements pair with others in a structured manner, you can avoid explicit pairwise summation.
+Grouping strategy: For each element, calculate its contribution to all pairwise sums without calculating each sum explicitly.
+Time Complexity: O(N), by avoiding the need to explicitly calculate every sum.
+
+
+#5. Efficient Preprocessing and Query Handling:
+
+If there are multiple queries or test cases, preprocess the array once to handle queries efficiently.
+Use techniques like precomputed XOR arrays (similar to prefix sums) to speed up repeated calculations of XOR for subsets or pairs of elements.
+Time Complexity: O(N) preprocessing and O(1) per query.
+Conclusion:
+For small inputs (where N is small), the brute-force approach is acceptable.
+For larger inputs, the bitwise manipulation and optimized XOR accumulation methods are the best, with a linear or quasi-linear time complexity, which will be able to handle the constraints of the problem efficiently.
+
+
+
+
+
