@@ -1,0 +1,65 @@
+LL contains:
+Value (Integer)
+Pointer to next node
+
+Primary Operations
+Insertion: Inserting an element at end/beginning or in the middle at some kth position.
+Deletion : Deleting an element from the list.
+Display : Traversing the whole linked list and output each element.
+
+//Implementation:
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int value;
+    Node* next;
+
+    Node(int val) : 
+    value(val), next(nullptr) {}
+};
+
+int main() {
+    Node* head = new Node(1);
+    cout << "The value at head is " << head->value << '\n';
+    return 0;
+}
+
+1. we created  a class node and in public specifier, we gave two data members ie., value and its pointer(next)
+2. next, we use parameterized contructor of parameter val of int type.
+3. line 19 -21 is a initialiser list:
+    An initializer list in C++ is a way to initialize member variables of a class before the constructor body executes. 
+    It is used to set initial values for the member variables directly. The syntax for an initializer list involves a colon (:) followed by a list of initializations.
+
+    //revised code:
+    
+#include <iostream>
+using namespace std;
+
+class Node{
+    public: 
+  int value;
+  Node* next;  //pointer to point to next node 
+  
+    Node(int val) :  //creating object for the class using parameterized constructor using initialiser list
+      value(val),
+      next(nullptr){}
+      
+    //   or use this initialisation method for ease
+    
+    // Node(int val) {
+    //     value = val;
+    //     next = nullptr;
+    // }
+      
+  
+};
+
+int main()
+{
+    Node* head=new Node(1);  //DMA allocation of value to node
+    cout<<"value at node-1 is: " << head->value<<endl;
+
+    return 0;
+}
