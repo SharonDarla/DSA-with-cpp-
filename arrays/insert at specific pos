@@ -68,3 +68,50 @@ int main() {
 	cout<<endl;
 	return 0;
 }
+
+====================================================================================================================
+
+to dynamically insert a ele at pos :
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void insertElement(vector<int>& arr, int ele, int pos) {
+    arr.insert(arr.begin() + pos, ele); // Use vector's insert method for simplicity
+}
+
+int main() {
+    vector<int> arr;
+    int n, ele, pos, input;
+
+    cout << "Enter the number of elements: ";
+    cin >> n;
+    cout << "Enter the elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> input;
+        arr.push_back(input); // Dynamically add elements to the vector
+    }
+
+    cout << "Enter element to insert at a pos: ";
+    cin >> ele;
+    cout << "Enter the position to insert: ";
+    cin >> pos;
+
+    cout << "Before insertion: ";
+    for (int i = 0; i < arr.size(); i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    insertElement(arr, ele, pos);
+
+    cout << "After insertion: ";
+    for (int i = 0; i < arr.size(); i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
