@@ -1,0 +1,12 @@
+int countDigits(int n){
+	// Write your code here.
+	int orgN = n, count =0;
+	while(n>0){
+		int lastDig = n%10;
+		if(lastDig !=0 && orgN % lastDig == 0){
+			count++;
+		}
+		n/=10;
+	}
+	return count;
+}
