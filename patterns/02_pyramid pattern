@@ -1,0 +1,72 @@
+class Solution{
+public:
+	
+	void printTriangle(int n) {
+	    // code here
+	    for(int i=0;i<n;i++){
+	        for(int j=0;j<i;j++){
+	            cout<<" ";
+	        }
+	        for(int j=0;j<2*n-(2*i+1);j++){
+	            cout<<"*";
+	        }
+	        cout<<endl;
+	    }
+	}
+};
+
+
+//or method -2
+
+Intuition
+The key idea behind the approach is to use nested loops to print a triangle pattern of asterisks. The outer loop controls the number of rows, while the inner loops manage the printing of spaces and asterisks for each row. By adjusting the ranges of the inner loops, the pattern forms a triangle shape with increasing asterisks and decreasing spaces in each row.
+
+Implementation
+Outer loop to iterate through each row:
+The outer loop iterates from 1 to N (inclusive), representing each row of the triangle.
+Inner loop to print spaces before the asterisks:
+For each row, an inner loop is used to print the required number of spaces before printing the asterisks.
+The number of spaces decreases as we move to lower rows to form the triangle pattern.
+The range for the inner loop is determined by N - row, ensuring that the number of spaces decreases by 1 for each subsequent row.
+Inner loop to print asterisks for each row:
+Another inner loop is used to print the asterisks for each row.
+The number of asterisks increases by 2 for each row to form the triangle pattern.
+The range for the inner loop is from 1 to 2 * row, ensuring that the number of asterisks doubles for each subsequent row.
+Printing a newline after each row:
+After printing the required number of spaces and asterisks for each row, a newline character is printed to move to the next row.
+Example
+Input= 5
+
+Row 1 (row = 1):
+Total spaces needed: N - row = 5 - 1 = 4
+Therefore, there are 4 spaces before the single asterisk.
+Row 2 (row = 2):
+Total spaces needed: N - row = 5 - 2 = 3
+Therefore, there are 3 spaces before the three asterisks.
+Row 3 (row = 3):
+Total spaces needed: N - row = 5 - 3 = 2
+Therefore, there are 2 spaces before the five asterisks.
+Row 4 (row = 4):
+Total spaces needed: N - row = 5 - 4 = 1
+Therefore, there is 1 space before the seven asterisks.
+Row 5 (row = 5):
+Total spaces needed: N - row = 5 - 5 = 0
+Therefore, there are no spaces before the nine asterisks
+// Function to print a triangle pattern with n rows
+class Solution {
+  public:
+    void printTriangle(int n) {
+        // Loop for each row of the triangle
+        for (int i = n; i >= 1; i--) {
+            // Loop for spaces before the stars in each row
+            for (int j = 1; j < i; j++) {
+                cout << " ";
+            }
+            // Loop for printing stars in each row
+            for (int j = 1; j <= 2 * (n - i) + 1; j++) {
+                cout << "*";
+            }
+            cout << endl;
+        }
+    }
+};
