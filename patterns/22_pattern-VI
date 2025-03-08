@@ -1,0 +1,66 @@
+Void pattern22(int n){
+    int num=n;
+    int size=2*n-1;
+    int arr[size][size];
+    int top=0, bot=size-1, left=0, right=size-1;
+    while(num>0){
+        //top row
+        for(int i=left;i<=right;i++){
+            arr[top][i]=num;
+        }
+        top++;
+        // right col
+        for(int i=top; i<=bot;i++){
+            arr[i][right]=num;
+        }
+        right--;
+        // bottom
+        for(int i=right;i>=left;i--){
+            arr[bot][i]=num;
+        }
+        bot--;
+        // left col
+        for(int i=bot;i>=top;i--){
+           arr[i][left]=num;
+        }
+        left++;
+        num--;
+    }
+    for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
+            cout<<arr[i][j];
+        }
+        cout<<endl;
+    }
+}
+
+// ===================================================
+void patrn22str(int n){
+    for(int i=0;i<2*n-1;i++){
+        for(int j=0;j<2*n-1;j++){
+            int top= i;
+            int left= j;
+            int right=(2*n-2)-j;
+            int down=(2*n-2)-i;
+            cout<< n-min(min(top,down), min(left,right));
+        }
+        cout<<endl;
+    }
+}
+// ======================================================
+
+
+// Driver code
+int main()
+{
+    int t;
+    cout << "enter no. of testcases: ";
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cout << "enter num: ";
+        cin >> n;
+        patrn22str(n);
+    }
+}
