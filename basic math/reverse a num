@@ -51,38 +51,3 @@ public:
     }
 }; 
 
-or =================
-
-class Solution {
-public:
-    int reverse(int x) {
-        int reversedNum = 0;
-        
-        // Process the number digit by digit
-        while (x != 0) {
-            // Extract the last digit
-            int digit = x % 10;
-            
-            // Check for potential overflow before adding new digit Max positive 32-bit int: 2147483647 Min negative 32-bit int: -2147483648
-            if (reversedNum > INT_MAX / 10 || 
-                (reversedNum == INT_MAX / 10 && digit > 7)) {
-                return 0;
-            }
-            
-            if (reversedNum < INT_MIN / 10 || 
-                (reversedNum == INT_MIN / 10 && digit < -8)) {
-                return 0;
-            }
-            
-            // Build the reversed number
-            reversedNum = reversedNum * 10 + digit;
-            
-            // Remove the last digit from original number
-            x /= 10;
-        }
-        
-        return reversedNum;
-    }
-};
-
-
