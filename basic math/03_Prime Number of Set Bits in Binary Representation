@@ -1,0 +1,339 @@
+Given two integers left and right, return the count of numbers in the inclusive range [left, right] having a prime number of set bits in their binary representation.
+
+Recall that the number of set bits an integer has is the number of 1's present when written in binary.
+
+For example, 21 written in binary is 10101, which has 3 set bits.
+ 
+
+Example 1:
+
+Input: left = 6, right = 10
+Output: 4
+Explanation:
+6  -> 110 (2 set bits, 2 is prime)
+7  -> 111 (3 set bits, 3 is prime)
+8  -> 1000 (1 set bit, 1 is not prime)
+9  -> 1001 (2 set bits, 2 is prime)
+10 -> 1010 (2 set bits, 2 is prime)
+4 numbers have a prime number of set bits.
+Example 2:
+
+Input: left = 10, right = 15
+Output: 5
+Explanation:
+10 -> 1010 (2 set bits, 2 is prime)
+11 -> 1011 (3 set bits, 3 is prime)
+12 -> 1100 (2 set bits, 2 is prime)
+13 -> 1101 (3 set bits, 3 is prime)
+14 -> 1110 (3 set bits, 3 is prime)
+15 -> 1111 (4 set bits, 4 is not prime)
+5 numbers have a prime number of set bits.
+ 
+
+Constraints:
+
+1 <= left <= right <= 106
+0 <= right - left <= 104
+
+
+profile
+Qwen2.5-Max
+5:09 pm
+Let me break down the problem statement and explain what it requires you to do in simple terms.
+
+What is the Problem Asking?
+The problem wants you to count how many numbers in a given range [left, right] have a prime number of set bits in their binary representation. Here's what that means step by step:
+
+Key Terms Explained
+Binary Representation :
+Every integer can be written in binary form (base 2), which consists of only 0s and 1s.
+For example:
+6 in binary is 110.
+21 in binary is 10101.
+Set Bits :
+The "set bits" of a number are the 1s in its binary representation.
+For example:
+6 -> 110 has 2 set bits (1 and 1).
+21 -> 10101 has 3 set bits (1, 1, and 1).
+Prime Number :
+A prime number is an integer greater than 1 that has no divisors other than 1 and itself.
+Examples of prime numbers: 2, 3, 5, 7, 11, ...
+Non-prime numbers: 1, 4, 6, 8, 9, ...
+Inclusive Range [left, right] :
+You are given two integers, left and right, and you need to consider all integers between them (including left and right).
+What Does the Problem Require?
+Step 1: Count Set Bits :
+For each number in the range [left, right], calculate how many 1s are in its binary representation (i.e., count the set bits).
+Step 2: Check if the Count is Prime :
+After counting the set bits for a number, check if the count is a prime number.
+Step 3: Count Valid Numbers :
+Count how many numbers in the range [left, right] have a prime number of set bits.
+Output :
+Return the total count of such numbers.
+Example Walkthrough
+Example 1:
+Input: left = 6, right = 10
+
+Step 1: Write each number in binary and count its set bits:
+6 -> 110 → Set bits = 2 (prime)
+7 -> 111 → Set bits = 3 (prime)
+8 -> 1000 → Set bits = 1 (not prime)
+9 -> 1001 → Set bits = 2 (prime)
+10 -> 1010 → Set bits = 2 (prime)
+Step 2: Count numbers with a prime number of set bits:
+Numbers: 6, 7, 9, 10 → Total = 4
+Output:
+
+
+
+1
+4
+Example 2:
+Input: left = 10, right = 15
+
+Step 1: Write each number in binary and count its set bits:
+10 -> 1010 → Set bits = 2 (prime)
+11 -> 1011 → Set bits = 3 (prime)
+12 -> 1100 → Set bits = 2 (prime)
+13 -> 1101 → Set bits = 3 (prime)
+14 -> 1110 → Set bits = 3 (prime)
+15 -> 1111 → Set bits = 4 (not prime)
+Step 2: Count numbers with a prime number of set bits:
+Numbers: 10, 11, 12, 13, 14 → Total = 5
+Output:
+1
+5
+
+
+Constraints
+Range Size :
+The range [left, right] can include up to 10^4 numbers (0 <= right - left <= 10^4).This means you need an efficient solution that doesn't take too long to process large ranges.
+(What is right - left?
+The expression right - left represents the size of the range between two numbers, left and right. It tells you how many numbers are in the range [left, right] (including both left and right).
+
+For example:
+If left = 5 and right = 10, then right - left = 10 - 5 = 5.
+The range [5, 10] includes the numbers: 5, 6, 7, 8, 9, 10 → Total = 6 numbers .)
+[The "+1" ensures we count all numbers in the inclusive range.]
+
+Number Size : Each number can be as large as 10^6, so the binary representation of any number will have at most log 2
+​
+ (10^6)≈20 bits.
+Therefore, the number of set bits for any number will always be ≤ 20.
+
+
+Solutions:
+
+
+1. Brute Force Approach
+
+#include <iostream>
+using namespace std;
+
+// Function to count set bits
+int countSetBits(int n) {
+    int count = 0;
+    while (n > 0) {
+        count += (n & 1);
+        n >>= 1;
+    }
+    return count;
+}
+
+// Function to check if a number is prime
+bool isPrime(int num) {
+    if (num < 2) return false;
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) return false;
+    }
+    return true;
+}
+
+// Main function
+int countPrimeSetBits(int left, int right) {
+    int count = 0;
+    for (int n = left; n <= right; n++) {
+        int setBits = countSetBits(n);
+        if (isPrime(setBits)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    cout << countPrimeSetBits(6, 10) << endl; // Output: 4
+    cout << countPrimeSetBits(10, 15) << endl; // Output: 5
+    return 0;
+}
+
+ Optimized Prime Check Using Precomputation
+Instead of checking primality repeatedly, precompute all primes up to 20 (the maximum possible set bits).
+
+Steps:
+Precompute all primes up to 20 using a lookup table or sieve.
+Use this table to check if the count of set bits is prime.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Precompute primes up to 20
+vector<bool> precomputePrimes() {
+    vector<bool> isPrime(21, false);
+    isPrime[2] = true;
+    isPrime[3] = true;
+    isPrime[5] = true;
+    isPrime[7] = true;
+    isPrime[11] = true;
+    isPrime[13] = true;
+    isPrime[17] = true;
+    isPrime[19] = true;
+    return isPrime;
+}
+
+// Main function
+int countPrimeSetBits(int left, int right) {
+    vector<bool> isPrime = precomputePrimes();
+    int count = 0;
+
+    for (int n = left; n <= right; n++) {
+        int setBits = __builtin_popcount(n); // Efficiently count set bits
+        if (setBits <= 20 && isPrime[setBits]) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    cout << countPrimeSetBits(6, 10) << endl; // Output: 4
+    cout << countPrimeSetBits(10, 15) << endl; // Output: 5
+    return 0;
+}
+
+3. Brian Kernighan's Algorithm for Counting Set Bits
+This algorithm skips over unset bits, making it faster than manually shifting through all bits.
+
+Steps:
+Use Brian Kernighan's algorithm to count set bits efficiently.
+Precompute primes up to 20 for fast primality checks.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Precompute primes up to 20
+vector<bool> precomputePrimes() {
+    vector<bool> isPrime(21, false);
+    isPrime[2] = true;
+    isPrime[3] = true;
+    isPrime[5] = true;
+    isPrime[7] = true;
+    isPrime[11] = true;
+    isPrime[13] = true;
+    isPrime[17] = true;
+    isPrime[19] = true;
+    return isPrime;
+}
+
+// Count set bits using Brian Kernighan's algorithm
+int countSetBits(int n) {
+    int count = 0;
+    while (n > 0) {
+        n &= (n - 1); // Flip the least significant set bit
+        count++;
+    }
+    return count;
+}
+
+// Main function
+int countPrimeSetBits(int left, int right) {
+    vector<bool> isPrime = precomputePrimes();
+    int count = 0;
+
+    for (int n = left; n <= right; n++) {
+        int setBits = countSetBits(n);
+        if (setBits <= 20 && isPrime[setBits]) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    cout << countPrimeSetBits(6, 10) << endl; // Output: 4
+    cout << countPrimeSetBits(10, 15) << endl; // Output: 5
+    return 0;
+}
+
+4. Bitmasking with Precomputed Results
+For very large ranges, you can optimize further by precomputing results for smaller subranges.
+
+Steps:
+Precompute the number of set bits for all numbers up to 10 
+6
+ .
+Precompute whether each count of set bits is prime.
+Use these precomputed results to answer queries in constant time.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MAX = 1e6 + 1;
+
+// Precompute set bits for all numbers up to MAX
+vector<int> precomputeSetBits() {
+    vector<int> setBits(MAX, 0);
+    for (int i = 1; i < MAX; i++) {
+        setBits[i] = setBits[i >> 1] + (i & 1);
+    }
+    return setBits;
+}
+
+// Precompute primes up to 20
+vector<bool> precomputePrimes() {
+    vector<bool> isPrime(21, false);
+    isPrime[2] = true;
+    isPrime[3] = true;
+    isPrime[5] = true;
+    isPrime[7] = true;
+    isPrime[11] = true;
+    isPrime[13] = true;
+    isPrime[17] = true;
+    isPrime[19] = true;
+    return isPrime;
+}
+
+// Main function
+int countPrimeSetBits(int left, int right) {
+    vector<int> setBits = precomputeSetBits();
+    vector<bool> isPrime = precomputePrimes();
+
+    int count = 0;
+    for (int n = left; n <= right; n++) {
+        if (isPrime[setBits[n]]) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    cout << countPrimeSetBits(6, 10) << endl; // Output: 4
+    cout << countPrimeSetBits(10, 15) << endl; // Output: 5
+    return 0;
+}
+
+5. Parallelization (Advanced Optimization)
+If the range [left, right] is very large, you can parallelize the computation across multiple threads or processes.
+
+Steps:
+Divide the range [left, right] into smaller chunks.
+Process each chunk in parallel using multithreading or multiprocessing.
+Combine the results from all threads.
+
