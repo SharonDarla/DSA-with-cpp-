@@ -1,0 +1,44 @@
+1]
+// #include <iostream>
+// using namespace std;
+// int sum(int n){
+//     if(n==0) return 0;
+//     return n+sum(n-1);
+// }
+// int main()
+// {
+//     int n; cin>>n;
+//     cout<<sum(n);
+
+//     return 0;
+// }
+
+
+--------------------------------------
+2]
+#include <iostream>
+using namespace std;
+void func(int i,int sum){
+    if(i<1){
+        cout<<sum;
+        return;
+    }
+    func(i-1,sum+i);
+}
+int main()
+{
+    int n; cin>>n;
+    func(n,0);
+
+    return 0;
+}
+
+Ikkada manam printing vs returning concept chudam first: 
+=> printing just displays the value, so that's dummy showcase ki thappa em cheskolem dani tho, 
+=> returning emo returns a value, dani manam vere daniki use cheskovachu ledha display cheyochu 
+
+Coming to concept here ==
+In code-1, we're using func recursion, that func has a return type, so we can use cout to display the value it is returning .
+in code-2, its a void function, doesnt return anything, so just call the func to showcase its functionality, tryna print causes error bcz ure printing void (nothing)
+
+Coming to core concepts of these func types-  see DSA NOTES.
