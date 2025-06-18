@@ -1,0 +1,122 @@
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+ 
+
+Example 1:
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+Example 2:
+
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
+Example 3:
+
+Input: s = " "
+Output: true
+Explanation: s is an empty string "" after removing non-alphanumeric characters.
+Since an empty string reads the same forward and backward, it is a palindrome.
+ 
+
+Constraints:
+
+1 <= s.length <= 2 * 105
+s consists only of printable ASCII characters.
+
+solution- two approaches
+
+// class Solution {
+// public:
+//     bool isPalindrome(string s) {
+//         int l=0,r=s.size()-1;
+//         while(l<=r){
+//             if(!isalnum(s[l])){
+//             l++;
+//             continue;
+//         }
+//         if(!isalnum(s[r])){
+//             r--;
+//             continue;
+//         }
+//         if(tolower(s[l]) != tolower(s[r])) return false;
+//         else{
+//             l++;
+//             r--;
+//         }
+//         }
+        
+//         return true;
+//     }
+// };
+
+class Solution{
+    public:
+    bool isPalindrome(string s){
+        string str;
+        for(char c:s){
+            if(isalnum(c)){
+                str+= tolower(c);
+            }
+        }
+        int start=0,end=str.size()-1;
+        while(start<=end){
+            if(str[start]!= str[end]){
+                return false;
+            }
+            start++; end--;
+        }
+        return true;
+    }
+};
+
+//using recursion
+
+class Solution {
+public:
+    bool isPalindrome(string& s, int l = 0, int r = -1) {
+        if (r == -1) r = s.size() - 1;  // initialize right pointer once
+
+        // Base case: pointers crossed
+        if (l >= r) return true;
+
+        // Skip non-alphanumeric characters
+        if (!isalnum(s[l])) return isPalindrome(s, l + 1, r);
+        if (!isalnum(s[r])) return isPalindrome(s, l, r - 1);
+
+        // Compare characters (case-insensitive)
+        if (tolower(s[l]) != tolower(s[r])) return false;
+
+        // Move both pointers inward
+        return isPalindrome(s, l + 1, r - 1);
+    }
+};
+
+
+using rec- w/o changing func parameters ie., signature
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        return check(s, 0, s.size() - 1);
+    }
+
+private:
+    bool check(const string& s, int l, int r) {
+        // Base case
+        if (l >= r) return true;
+
+        // Skip non-alphanumeric characters
+        if (!isalnum(s[l])) return check(s, l + 1, r);
+        if (!isalnum(s[r])) return check(s, l, r - 1);
+
+        // Check characters (case-insensitive)
+        if (tolower(s[l]) != tolower(s[r])) return false;
+
+        // Move inward
+        return check(s, l + 1, r - 1);
+    }
+};
