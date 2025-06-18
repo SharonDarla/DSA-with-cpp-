@@ -97,3 +97,9 @@ public:
         return vec[n];
     }  
 };
+
+So now you know:
+
+✅ Working with references saves memory
+✅ Avoids MLE (Memory Limit Exceeded)
+✅ Makes your recursive memoization way more efficient
