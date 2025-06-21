@@ -1,0 +1,67 @@
+In unordered_map
+
+🔑 What is a hash value and bucket index in unordered_map?
+When you insert a key (like 10) into an unordered_map, C++ does not store it directly at a fixed location. Instead, it uses a hash function to calculate a value from that key.
+
+🔹 Step-by-step:
+🔢 Key: e.g., 10
+
+⚙️ Hash Function:
+Converts the key to a hash value (a large integer).
+In C++, the default is std::hash<int>()(key).
+
+Example:
+
+cpp
+Copy
+Edit
+size_t h = hash<int>{}(10);  // may return a value like 123456
+📦 Bucket Index:
+The hash value is then modulo divided by the number of buckets to find the index:
+
+cpp
+Copy
+Edit
+index = hash_value % num_buckets;
+So if there are 8 buckets and hash of 10 is 123456, then:
+
+cpp
+Copy
+Edit
+index = 123456 % 8 = 0
+So key 10 is placed in bucket 0.
+
+📦 What is a "bucket"?
+A bucket is just a slot (like a box) that can store one or more key-value pairs.
+If two keys hash to the same index (called collision), they are stored together in a chain or list in that bucket.
+
+🔁 Example:
+Let’s insert these values into an unordered_map:
+
+cpp
+Copy
+Edit
+arr = {10, 5, 15}
+Assume:
+
+hash(10) % 8 = 0
+
+hash(5) % 8 = 3
+
+hash(15) % 8 = 3 ← collision with 5
+
+Then:
+
+Bucket Index	Contents
+0	10 → 1
+1	
+2	
+3	5 → 1, 15 → 1 (chain)
+4–7	
+
+🔄 Summary:
+Term	Meaning
+Key	The number you're storing (e.g., 10)
+Hash Value	The result of applying a hash function to the key (hash<int>{}(key))
+Index	The bucket index where key-value is stored → hash_value % total_buckets
+Bucket	A container (array slot) that stores the actual key-value pairs in unordered_map
