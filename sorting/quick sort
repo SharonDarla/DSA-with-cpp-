@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int partition(vector<int>&arr,int low,int high){
+    int pivot=arr[low];
+    int i=low;
+    int j=high;
+    while(i<j){
+        while(arr[i]<=pivot && i<=high-1){
+            i++;
+        }
+        while(arr[j]>pivot && j >=low+1){
+            j--;
+        }
+        if(i<j)swap(arr[i],arr[j]);
+    }
+    
+    // here why not swap with pivot, bcz pivot is just a another variable that stores an value in arr, and we cant swap this within arr elements, use elements or indices within arr
+    // so use arr[low];
+    swap(arr[low],arr[j]);
+    return j;
+}
+
+void qs(vector<int>&arr, int low, int high){
+    if(low<high){
+        int pIndex=partition(arr,low,high);
+        // calling recursive function
+        
+        qs(arr,low,pIndex-1);
+        qs(arr,pIndex+1,high);
+    }
+}
+
+vector<int> quickSort(vector<int> &arr){
+    qs(arr,0,arr.size()-1);
+    return arr;
+}
+
+int main()
+{
+    int n; cin>>n;
+    vector<int>arr(n);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cout<<"before sorting: "<<endl;
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    
+    // here two ways to return the sorted arr use & pass by reference in quickSort func() or capture the returned copy of sorted arr in main() func using an extra variable arr=quicksort()
+    quickSort(arr);
+    
+    cout<<"after sorting: "<<endl;
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+
+    return 0;
+}
+
+
+//here we are using seperate functions bcz in quicksort func we expect it to just take an arr from user and sort it internally using quicksort and return the arr
+// else it would need to ask the user for low index, high etc or we need to assign externally.
+
+==============================================================================================================================================================================================
+
