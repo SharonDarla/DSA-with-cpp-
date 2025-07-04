@@ -60,9 +60,15 @@ int main()
     return 0;
 }
 
-
+/*
 //here we are using seperate functions bcz in quicksort func we expect it to just take an arr from user and sort it internally using quicksort and return the arr
 // else it would need to ask the user for low index, high etc or we need to assign externally.
 
 ==============================================================================================================================================================================================
 
+To sort the array in descending order: change logic in partition function, while loop responsible for handling order of ele around partition index like which side of array should have greater ele & which side small
+so after the below change it processes array to have larger elemnts left of the partition index and smaller elements to the right.
+
+arr[i] <= pivot → arr[i] >= pivot
+arr[j] > pivot → arr[j] < pivot
+*/
