@@ -1,0 +1,63 @@
+// program to  find the smallest and the second smallest ele of an array;
+
+#include <bits/stdc++.h>
+using namespace std;
+int secSmall(vector<int>&a,int n){
+    int sm=a[0];
+    int sSm=INT_MAX;
+    
+    // 5 4 3 1 2 -> test with this array for sm and sSm
+    for(int i=1;i<n;i++){
+        if(a[i]<sm){
+            sSm=sm;
+            sm=a[i];
+        }
+        else if(a[i]!= sm && a[i]<sSm){
+            sSm=a[i];
+        }
+    }
+    return sSm;
+}
+
+
+int secLar(vector<int>&a,int n){
+    
+    // 1 2 4 7 7 5 -> test with this arr for larVal and sLarVal
+    
+    int larVal=a[0];
+    int sLarVal=-1; //Int_MIN if input arr has -ve values
+    for(int i=1;i<n;i++){
+        if(a[i]>larVal){
+            sLarVal=larVal;
+            larVal=a[i];
+        }
+        else if(a[i] < larVal && a[i]>sLarVal){
+            sLarVal=a[i];
+        }
+    }
+    return sLarVal;
+}
+
+vector<int>getEle(vector<int>&a,int n){
+    int secondSmallest=secSmall(a,n) ;   
+    int secondLargest=secLar(a,n) ;   
+    return{secondSmallest,secondLargest};
+}
+
+int main()
+{
+    int n; cin>>n;
+    vector<int>a(n);
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    
+    vector<int>res=getEle(a,n);
+    
+    for(auto it: res){
+        cout<<it<<" ";
+    }
+    return 0;
+}
+
+# we can also create a integer function that returns two values but here we created a vector that returns a vector containing two elements.
