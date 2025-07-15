@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//  BRUTE FORCE ==> USING HASHSET -- T.C = O(N*LOG(N)+N) ; S.C = O(N) => auxiliary space for set 
+
+int removeDuplicates(int arr[], int n){
+    // insert elements into set
+    set<int>st;
+    for(int i=0;i<n;i++){
+        st.insert(arr[i]);
+    }
+    int s=st.size();
+    // modify the array in inplace by replacing set values in the arr
+    int idx=0;
+    for(auto it: st){
+        arr[idx]=it;
+        idx++;
+    }
+    return s;
+}
+int main()
+{
+     int arr[] = {1,1,2,2,2,3,3,4,5,5,9};
+  int n = sizeof(arr)/sizeof(arr[0]);
+  
+  int k = removeDuplicates(arr, n);
+  
+  cout << "The array after removing duplicate elements is " << endl;
+  for (int i = 0; i < k; i++) {
+    cout << arr[i] << " ";
+  }
+  
+cout<<"\nthe size of the set is: "<<k<<endl;
+    return 0;
+}
+
+# ----------------------------------------------------------------------------------------------------------------------------
+
+// OPTIMAL==> USING TWO POINTERS -- T.C = O(N) , S.C = O(1)
+
+int removeDuplicates(int arr[], int n){
+    int i=0; // points at starting index assuming first ele is always unique
+    for(int j=1;j<n;j++){
+        if(arr[j]!=arr[i]){
+            arr[i+1]=arr[j];
+            i++;
+        }
+    }
+    return i+1;
+}
