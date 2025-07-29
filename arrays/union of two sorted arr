@@ -1,0 +1,81 @@
+# BRUTE
+def union_of_arr(a1,a2):
+    mp={}
+    res=[]
+    for ele in a1:
+        mp[ele]=mp.get(ele,0)+1 
+    for ele in a2:
+        mp[ele]=mp.get(ele,0)+1 
+    for ele in mp:
+        res.append(ele)
+    return mp 
+a1= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+a2= [2, 3, 4, 4, 5, 11, 12]
+
+union =union_of_arr(a1,a2)
+
+print("Union of arr1 and arr2 is:")
+for num in union:
+    print(num, end=" ")
+    
+# two for loops ki (m+n) and insertion of two arr ele into map(log(m+n))
+# so total T.C = (m+n)log(m+n)
+
+
+# 2) USING set
+def func(a1,a2):
+    s=set()
+    res=[]
+    
+    for i in a1:
+        s.add(i)
+    for i in a2:
+        s.add(i)
+    for num in s:
+        res.append(num)
+    return res
+a1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+a2 = [2, 3, 4, 4, 5, 11, 12]
+
+union = func(a1,a2)
+
+print("Union of arr1 and arr2 is:")
+print(*union)
+
+
+# OPTIMAL 
+def func(a1,a2): 
+    i,j=0,0 #TWO POINTERS
+    union=[]
+    n=len(a1)
+    m=len(a2)
+    while i<n and j<m:
+        if a1[i]<=a2[j]:
+            if len(union)==0 or union[-1]!=a1[i]:
+                union.append(a1[i])
+            i+=1 
+        else:
+            if len(union)==0 or union[-1]!=a2[j]:
+                union.append(a2[j])
+            j+=1 
+    while j<m:
+        if len(union)==0 or union[-1]!=a2[j]:
+                union.append(a2[j])
+        j+=1 
+    while i<n:
+        if union[-1]!=a1[i]:
+                union.append(a1[i])
+        i+=1
+            
+    return union 
+a1= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+a2= [2, 3, 4, 4, 5, 11, 12]
+
+union = func(a1,a2)
+
+print("Union of arr1 and arr2 is:")
+print(*union)
+
+or 
+a1.union(a2) 
+print(a1 | a2)
