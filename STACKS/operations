@@ -1,0 +1,41 @@
+stack=[]
+
+#PUSH 
+stack.append(10)
+stack.append(20)
+stack.append(30)
+print(stack)
+
+#PEEK
+top_ele=stack[-1]
+print(f"the Top element(peek operation) is: {top_ele}")
+
+# POP
+deleted=stack.pop()
+print(deleted)
+print(stack)
+
+#CHECK WHETHER STACK IS EMPTY USING - NOT OPERATOR
+
+if not stack:
+    print("stack is empty")
+else:
+    print("stack has elements.")
+    
+# SIZE OF stack
+print(f"length of stack {len(stack)}")
+
+for i in range(len(stack)-1, -1, -1):
+    print(stack[i]) 
+    
+top_element = stack[-1]
+print(f"the Top element(peek operation) is: {top_element}")
+
+
+print("================================================")
+stack.append(500)
+for item in stack:
+    print(item)    
+    
+top_element = stack[-1]
+print(f"the Top element(peek operation) is: {top_element}")
