@@ -1,0 +1,51 @@
+# W/O USING INBUILT FUNCTIONS --
+t = int(input())
+while t > 0:
+    n = int(input())
+    a = list(map(int, input().split()))
+    t -= 1
+    # Your code goes here
+    largest, sec_largest=0,0
+    for i in range(n):
+        if a[i] > largest:
+            sec_largest = largest
+            largest= a[i]
+            
+        if a[i] > sec_largest and a[i] < largest:
+            sec_largest = a[i]
+    print(largest+sec_largest)
+
+# instead of range based indexing - 
+t = int(input())
+
+while t > 0:
+    n = int(input())
+    a = list(map(int, input().split()))
+    t -= 1
+    # Your code goes here
+    largest, sec_largest=0,0
+    for ele in a:
+        if ele > largest:
+            sec_largest = largest
+            largest= ele
+            
+        if ele > sec_largest and ele < largest:
+            sec_largest = ele
+                
+    print(largest+sec_largest)
+
+# USING INBUILT FUNCTION - MAX()
+t = int(input())
+
+while t > 0:
+    n = int(input())
+    a = list(map(int, input().split()))
+    t -= 1
+    # Your code goes here
+    m1=max(a)
+    m2=0
+    
+    for ele in a:
+        if ele != m1:
+            m2=max(m2,ele)
+    print(m1+m2)
