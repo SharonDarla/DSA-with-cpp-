@@ -1,0 +1,25 @@
+https://www.codechef.com/practice/course/arrays-new/ARRAYSP01/problems/OPMIN
+class Solution:
+    def count_non_minimum(self, nums):
+        # write your code here
+        M=min(nums)
+        X=M 
+        N= len(nums)
+        count=0
+        for i in range(N):
+            if nums[i]>M:
+                nums[i] = X 
+                count+=1
+        return count
+
+class Solution:
+    def count_non_minimum(self, nums):
+        # write your code here
+        M=min(nums)
+        X=M 
+        N= len(nums)
+        count=0
+        for i in range(N):
+            if nums[i]>M: 
+                count+=1
+        return count
